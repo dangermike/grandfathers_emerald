@@ -37,9 +37,10 @@ class Game(object):
             sys.stdout.write("> ")
             sys.stdout.flush()
             input = sys.stdin.readline().strip("\n").split(' ')
-            if len(input) > 0:
-                print()
-                print('I don\'t know how to ' + input[0])
+            if len(input) == 0:
+                continue
+            print()
+            print('I don\'t know how to ' + input[0])
 
 
 def main():
