@@ -29,9 +29,15 @@ class Game(object):
             self._passages[self._rooms[passage.from_room]] = dirs
         self._room = self._rooms[start_room]
 
+    def room_changer(self, direction):
+        try:
+            self._room = self._passages[self._room][direction]
+        except KeyError:
+            print('you can not go this direction')
+
     def run(self):
         while True:
-            print()
+            print('')
             print('You are in %s' % self._room.title)
             print(self._room.description)
             sys.stdout.write("> ")
@@ -39,8 +45,11 @@ class Game(object):
             input = sys.stdin.readline().strip("\n").split(' ')
             if len(input) == 0:
                 continue
-            print()
-            print('I don\'t know how to ' + input[0])
+            print('')
+            if input[0] in ['n', 's', 'e', 'w']:
+                self.room_changer(input[0])
+            else:
+                print('I don\'t know how to ' + input[0])
 
 
 def main():
